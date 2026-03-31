@@ -57,13 +57,11 @@ class Edition(models.Edition):
 
     def get_authors(self):
         """Added to provide same interface for work and edition"""
-        work_authors = self.works[0].get_authors() if self.works else []
-        authors = [follow_redirect(a) for a in self.authors]
-        authors = [a for a in authors if a and a.type.key == "/type/author"]
         if self.works:
-            return work_authors
+            return self.works[0].get_authors()
         else:
-            return authors
+            authors = [follow_redirect(a) for a in self.authors]
+            return [a for a in authors if a and a.type.key == "/type/author"]
 
     def get_covers(self):
         """
