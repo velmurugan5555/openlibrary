@@ -56,12 +56,11 @@ class Edition(models.Edition):
     title_prefix = property(get_title_prefix)
 
     def get_authors(self):
-        """Added to provide same interface for work and edition"""
-        if self.works:
-            return self.works[0].get_authors()
-        else:
-            authors = [follow_redirect(a) for a in self.authors]
-            return [a for a in authors if a and a.type.key == "/type/author"]
+    if self.works:
+        return self.works[0].get_authors()
+
+    authors = [follow_redirect(a) for a in self.authors]
+    return [a for a in authors if a and a.type.key == "/type/author"]
 
     def get_covers(self):
         """
