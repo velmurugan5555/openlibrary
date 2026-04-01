@@ -55,7 +55,7 @@ class Edition(models.Edition):
     title = property(get_title)
     title_prefix = property(get_title_prefix)
 
-    def get_authors(self):
+   def get_authors(self):
     if self.works:
         return self.works[0].get_authors()
 
